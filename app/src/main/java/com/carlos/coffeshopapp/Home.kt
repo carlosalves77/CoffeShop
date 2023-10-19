@@ -2,13 +2,22 @@ package com.carlos.coffeshopapp
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -21,6 +30,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
@@ -32,9 +42,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.carlos.coffeshopapp.components.CustomCoffeeListItem
+import com.carlos.coffeshopapp.components.CustomCoffeeTypeItem
+import com.carlos.coffeshopapp.repository.CoffeeItemsRepository
+import com.carlos.coffeshopapp.repository.CoffeeTypeRepository
+import com.carlos.coffeshopapp.ui.theme.BackGroundColor
 import com.carlos.coffeshopapp.ui.theme.GrandientBackFirst
 import com.carlos.coffeshopapp.ui.theme.GrandientBackTwo
 import com.carlos.coffeshopapp.ui.theme.GraySearchBarText
+import com.carlos.coffeshopapp.ui.theme.LocationTextColor
 import com.carlos.coffeshopapp.ui.theme.Orange
 
 
@@ -51,8 +67,27 @@ fun Home() {
         mutableStateOf(false)
     }
 
-    ConstraintLayout(modifier.fillMaxSize()) {
-        val (locationText, cityText, imageProfile, searchBar) = createRefs()
+    val coffeeType = remember { CoffeeTypeRepository.coffeeList }
+    val coffeeList = remember { CoffeeItemsRepository.coffeeListItems }
+
+
+    ConstraintLayout(
+        modifier
+            .fillMaxSize()
+            .background(BackGroundColor)
+    ) {
+        val (locationText,
+            cityText,
+            imageProfile,
+            searchBar,
+            boxCard,
+            textCard,
+            textPromoCard,
+            lazyRow,
+            lazyColumn,
+            lazyColumnContainer
+        ) = createRefs()
+
         Box(
             modifier
                 .fillMaxWidth()
@@ -84,14 +119,14 @@ fun Home() {
                 )
                 Spacer(modifier = modifier.padding(5.dp))
                 Text(
-                    text = "Recife, Pernambuco",
+                    text = "Bilzen, Tanjungbalai",
                     modifier
                         .padding(start = 10.dp)
                         .constrainAs(cityText) {
                             top.linkTo(locationText.bottom)
                             start.linkTo(parent.start)
                         },
-                    color = Color.White,
+                    color = LocationTextColor,
                     fontWeight = FontWeight(800),
                     fontSize = 18.sp
                 )
@@ -108,7 +143,7 @@ fun Home() {
                         },
                     contentScale = ContentScale.Crop
                 )
-
+                Spacer(modifier.padding(10.dp))
                 SearchBar(
                     query = text,
                     onQueryChange = {
@@ -122,12 +157,12 @@ fun Home() {
                         active = it
                     },
                     modifier
-                        .padding(top = 10.dp)
                         .constrainAs(searchBar) {
                             top.linkTo(cityText.bottom)
                             start.linkTo(parent.start)
                             end.linkTo(parent.end)
                         },
+                    tonalElevation = 0.dp,
                     shape = RoundedCornerShape(14.dp),
                     placeholder = {
                         Text(
@@ -139,18 +174,113 @@ fun Home() {
                     trailingIcon = {
                         Box(
                             modifier
-                                .background(color = Orange)
-                                .clip(shape = RoundedCornerShape(16.dp)
-                                ).size(44.dp)
-
-
+                                .background(
+                                    color = Orange,
+                                    shape = RoundedCornerShape(16.dp)
+                                )
+                                .size(44.dp)
                         ) {
-
+                            Image(
+                                painterResource(id = R.drawable.furnitur_icon),
+                                contentDescription = null,
+                                modifier
+                                    .align(Alignment.Center)
+                                    .size(24.dp),
+                            )
                         }
 
                     }) {
 
                 }
+                ConstraintLayout(
+                    modifier
+                        .padding(top = 20.dp)
+                        .background(color = Color.White, shape = RoundedCornerShape(22.dp))
+                        .size(width = 315.dp, height = 140.dp)
+                        .constrainAs(boxCard) {
+                            top.linkTo(searchBar.bottom)
+                            start.linkTo(parent.start)
+                            end.linkTo(parent.end)
+                        }
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.card_image),
+                        contentDescription = "Image Card",
+                        modifier
+                            .fillMaxSize()
+                            .clip(RoundedCornerShape(22.dp)),
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Box(
+                        modifier
+                            .padding(top = 15.dp, start = 23.dp)
+                            .constrainAs(textPromoCard) {
+                                top.linkTo(parent.top)
+                                start.linkTo(parent.start)
+                            }
+                            .background(Color.Red, shape = RoundedCornerShape(13.dp))
+                    ) {
+                        Text(
+                            text = "Promo",
+                            modifier.padding(vertical = 5.dp, horizontal = 12.dp),
+                            fontWeight = FontWeight(800),
+                            color = Color.White,
+                            fontSize = 16.sp
+                        )
+                    }
+                    Text(
+                        text = "Buy one get\n one FREE",
+
+                        modifier
+                            .padding(start = 23.dp)
+                            .constrainAs(textCard) {
+                                top.linkTo(textPromoCard.bottom)
+                                start.linkTo(parent.start)
+                            },
+                        fontSize = 32.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight(800)
+                    )
+                }
+                LazyRow(
+                    modifier
+                        .padding(top = 20.dp)
+                        .constrainAs(lazyRow) {
+                            top.linkTo(boxCard.bottom)
+                            start.linkTo(parent.start)
+                        },
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+
+                ) {
+                    items(items = coffeeType, itemContent = {
+                        CustomCoffeeTypeItem(coffeeType = it)
+                    })
+
+                }
+                ConstraintLayout (
+                    modifier.fillMaxSize()
+                    .constrainAs(lazyColumnContainer) {
+                 top.linkTo(lazyRow.bottom)
+                }) {
+
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    modifier.constrainAs(lazyColumn) {
+                        top.linkTo(lazyRow.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    },
+                    verticalArrangement = Arrangement.spacedBy(6.dp),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    items(items = coffeeList, itemContent = {
+                        CustomCoffeeListItem(coffeeItems = it)
+                    })
+                }
+                }
+
+
             }
         }
     }
