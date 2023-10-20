@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,13 +28,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.carlos.coffeshopapp.R
 import com.carlos.coffeshopapp.model.CoffeeItems
-import com.carlos.coffeshopapp.ui.theme.ValidationContent
 import com.carlos.coffeshopapp.ui.theme.CoffeeNameList
 import com.carlos.coffeshopapp.ui.theme.CoffeeNamePlusList
 import com.carlos.coffeshopapp.ui.theme.CoffeePriceList
 import com.carlos.coffeshopapp.ui.theme.Orange
+import com.carlos.coffeshopapp.ui.theme.ValidationContent
 
 
 @Composable
@@ -51,14 +53,32 @@ fun CustomCoffeeListItem(coffeeItems: CoffeeItems) {
             horizontalAlignment = CenterHorizontally
         ) {
             Box(modifier.padding(4.dp)) {
-                // TODO - Avaliation starts
-//            Row(
-//                modifier
-//                    .background(ValidationContent)
-//                    .clip(RoundedCornerShape(16.dp))
-//                    .size(width = 51.dp, height = 25.dp)) {
-//
-//            }
+                Row(
+                    modifier
+                        .clip(shape = RoundedCornerShape(16.dp, 0.dp, 16.dp, 0.dp))
+                        .background(
+                            color = ValidationContent
+                        )
+                        .zIndex(1f)
+                        .size(width = 51.dp, height = 25.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+
+                ) {
+                    Icon(
+                        Icons.Default.Star, contentDescription = "Stars",
+                        modifier
+                            .size(15.dp)
+                            .padding(end = 2.dp),
+                        tint = Color.Yellow,
+                    )
+                    Text(
+                        text = coffeeItems.coffeeStars,
+                        color = Color.White,
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight(600),
+                    )
+                }
                 Image(
                     painter = painterResource(id = coffeeItems.coffeeImage),
                     contentDescription = "Coffee",
@@ -88,7 +108,8 @@ fun CustomCoffeeListItem(coffeeItems: CoffeeItems) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = coffeeItems.coffeePrice,
+//                    text = coffeeItems.coffeePrice,
+                    text = "Coffe",
                     fontWeight = FontWeight(600),
                     color = CoffeePriceList,
                     fontSize = 18.sp

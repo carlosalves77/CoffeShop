@@ -1,6 +1,7 @@
 package com.carlos.coffeshopapp.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
@@ -16,22 +17,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.carlos.coffeshopapp.model.CoffeeType
 import com.carlos.coffeshopapp.ui.theme.LazyRawText
+import com.carlos.coffeshopapp.ui.theme.Orange
 
 
 @Composable
-fun CustomCoffeeTypeItem(coffeeType: CoffeeType) {
+fun CustomCoffeeTypeItem(coffeeType: CoffeeType, selected: Boolean = false, clickAction: () -> Unit) {
     Row(
         modifier = Modifier
             .size(width = 121.dp, height = 38.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(Color.White),
+            .clickable { clickAction() }
+            .background(if (selected) Orange else Color.White),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.Center,
 
     ) {
         Text(
             text = coffeeType.coffeeTypeName,
-            color = LazyRawText,
+            color = if (selected) Color.White else LazyRawText,
             fontWeight = FontWeight(600),
             fontSize = 14.sp
         )

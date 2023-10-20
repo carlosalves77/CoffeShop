@@ -17,6 +17,15 @@ object CoffeeTypeRepository  {
         ),
         CoffeeType(
             coffeeTypeName = "Arrusk"
+        ),
+        CoffeeType(
+            coffeeTypeName = "Mocha"
+        ),
+        CoffeeType(
+            coffeeTypeName = "Ristretto"
+        ),
+        CoffeeType(
+            coffeeTypeName = "Lait"
         )
     )
 

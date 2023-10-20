@@ -2,22 +2,21 @@ package com.carlos.coffeshopapp
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -27,6 +26,7 @@ import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -37,7 +37,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.ResourceFont
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -53,9 +57,8 @@ import com.carlos.coffeshopapp.ui.theme.GraySearchBarText
 import com.carlos.coffeshopapp.ui.theme.LocationTextColor
 import com.carlos.coffeshopapp.ui.theme.Orange
 
-
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(device = "id:pixel_4")
+@Preview(device = "id:pixel_7_pro")
 @Composable
 fun Home() {
     val modifier = Modifier
@@ -67,30 +70,22 @@ fun Home() {
         mutableStateOf(false)
     }
 
+    var selectedIndex by remember {
+        mutableIntStateOf(0)
+    }
+
     val coffeeType = remember { CoffeeTypeRepository.coffeeList }
     val coffeeList = remember { CoffeeItemsRepository.coffeeListItems }
 
 
-    ConstraintLayout(
+    Column(
         modifier
             .fillMaxSize()
             .background(BackGroundColor)
     ) {
-        val (locationText,
-            cityText,
-            imageProfile,
-            searchBar,
-            boxCard,
-            textCard,
-            textPromoCard,
-            lazyRow,
-            lazyColumn,
-            lazyColumnContainer
-        ) = createRefs()
 
         Box(
             modifier
-                .fillMaxWidth()
                 .height(280.dp)
                 .background(
                     Brush.horizontalGradient(
@@ -103,9 +98,19 @@ fun Home() {
         ) {
             ConstraintLayout(
                 modifier
-                    .fillMaxSize()
                     .padding(24.dp)
             ) {
+
+                val (locationText,
+                    cityText,
+                    imageProfile,
+                    searchBar,
+                    boxCard,
+                    textCard,
+                    textPromoCard,
+                ) = createRefs()
+
+
                 Text(
                     text = "Location",
                     modifier
@@ -114,7 +119,8 @@ fun Home() {
                             top.linkTo(parent.top)
                             start.linkTo(parent.start)
                         },
-                    fontSize = 16.sp,
+                    fontFamily = FontFamily(Font(R.font.sora_regular, FontWeight(400))),
+                    fontSize = 12.sp,
                     color = Color.Gray,
                 )
                 Spacer(modifier = modifier.padding(5.dp))
@@ -127,8 +133,8 @@ fun Home() {
                             start.linkTo(parent.start)
                         },
                     color = LocationTextColor,
-                    fontWeight = FontWeight(800),
-                    fontSize = 18.sp
+                    fontFamily = FontFamily(Font(R.font.sora_bold, FontWeight(800))),
+                    fontSize = 14.sp
                 )
                 Image(
                     painter = painterResource(id = R.drawable.profilepicture),
@@ -224,14 +230,13 @@ fun Home() {
                         Text(
                             text = "Promo",
                             modifier.padding(vertical = 5.dp, horizontal = 12.dp),
-                            fontWeight = FontWeight(800),
+                            fontFamily = FontFamily(Font(R.font.sora_bold, FontWeight(600))),
                             color = Color.White,
                             fontSize = 16.sp
                         )
                     }
                     Text(
                         text = "Buy one get\n one FREE",
-
                         modifier
                             .padding(start = 23.dp)
                             .constrainAs(textCard) {
@@ -240,29 +245,38 @@ fun Home() {
                             },
                         fontSize = 32.sp,
                         color = Color.White,
-                        fontWeight = FontWeight(800)
+                        fontFamily = FontFamily(Font(R.font.sora_bold, FontWeight(600))),
                     )
                 }
-                LazyRow(
-                    modifier
-                        .padding(top = 20.dp)
-                        .constrainAs(lazyRow) {
-                            top.linkTo(boxCard.bottom)
-                            start.linkTo(parent.start)
-                        },
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+            }
+        } // Box End
+        ConstraintLayout(
+            modifier
+                .fillMaxSize()
+                .padding(top = 50.dp)
+        ) {
+            val (lazyRow, lazyColumnContainer, lazyColumn) = createRefs()
+            LazyRow(
+                modifier
+                    .padding(top = 30.dp, start = 16.dp)
+                    .constrainAs(lazyRow) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                    },
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
 
-                ) {
-                    items(items = coffeeType, itemContent = {
-                        CustomCoffeeTypeItem(coffeeType = it)
-                    })
-
+            ) {
+                itemsIndexed(items = coffeeType) { index, item ->
+                    CustomCoffeeTypeItem(coffeeType = item,  selected = selectedIndex == index, clickAction = { selectedIndex = index })
                 }
-                ConstraintLayout (
-                    modifier.fillMaxSize()
+            }
+            ConstraintLayout(
+                modifier
+                    .fillMaxSize()
+                    .padding(top = 15.dp, start = 16.dp, end = 16.dp)
                     .constrainAs(lazyColumnContainer) {
-                 top.linkTo(lazyRow.bottom)
-                }) {
+                        top.linkTo(lazyRow.bottom)
+                    }) {
 
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
@@ -278,10 +292,9 @@ fun Home() {
                         CustomCoffeeListItem(coffeeItems = it)
                     })
                 }
-                }
-
-
             }
+
         }
+
     }
 }

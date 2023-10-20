@@ -10,7 +10,7 @@ val Orange = Color(0xFFFF5722)
 val GrandientBackFirst = Color(0xFF131313)
 val GrandientBackTwo = Color(0xFF313131)
 
-val ValidationContent = Color(0xFF000000)
+val ValidationContent = Color(0x4D000000)
 val BackGroundColor = Color(0xFFF9F9F9)
 val LocationTextColor = Color(0xFFDDDDDD)
 val LazyRawText = Color(0xFF2F4B4E)
