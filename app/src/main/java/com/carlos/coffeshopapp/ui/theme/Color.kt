@@ -15,6 +15,9 @@ val BackGroundColor = Color(0xFFF9F9F9)
 val LocationTextColor = Color(0xFFDDDDDD)
 val LazyRawText = Color(0xFF2F4B4E)
 
+val IconColor = Color(0xFF2F2D2C)
+val starColor = Color(0xFFFBBE21)
+
 val CoffeeNameList = Color(0xFF2F2D2C)
 val CoffeeNamePlusList = Color(0xFF9B9B9B)
 val CoffeePriceList = Color(0xFF2F4B4E)

@@ -1,4 +1,4 @@
-package com.carlos.coffeshopapp
+package com.carlos.coffeshopapp.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,7 +14,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
 //            Onboarding()
-            Home()
+//            Home()
+            DetailScreen()
         }
     }
 }
