@@ -18,6 +18,14 @@ val LazyRawText = Color(0xFF2F4B4E)
 val IconColor = Color(0xFF2F2D2C)
 val starColor = Color(0xFFFBBE21)
 
+val DescriptionText = Color(0xFF9B9B9B)
+val BoxIconDetail = Color(0xFFF7F2F2)
+val RowLine = Color(0xFFEAEAEA)
+
+val SizeButton = Color(0xFFDEDEDE)
+val onSizeButtonClick = Color(0xFFC67C4E)
+val onSizeButtonBackGroundClick = Color(0xFFFFF5EE)
+
 val CoffeeNameList = Color(0xFF2F2D2C)
 val CoffeeNamePlusList = Color(0xFF9B9B9B)
 val CoffeePriceList = Color(0xFF2F4B4E)
