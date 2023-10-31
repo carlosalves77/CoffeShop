@@ -81,7 +81,7 @@ fun CustomCoffeeListItem(coffeeItems: CoffeeItems) {
                 }
                 Image(
                     painter = painterResource(id = coffeeItems.coffeeImage),
-                    contentDescription = "Coffee",
+                    contentDescription = "Café",
                     modifier
                         .size(width = 141.dp, height = 132.dp)
                 )
@@ -109,7 +109,7 @@ fun CustomCoffeeListItem(coffeeItems: CoffeeItems) {
             ) {
                 Text(
 //                    text = coffeeItems.coffeePrice,
-                    text = "Coffe",
+                    text = "Café",
                     fontWeight = FontWeight(600),
                     color = CoffeePriceList,
                     fontSize = 18.sp

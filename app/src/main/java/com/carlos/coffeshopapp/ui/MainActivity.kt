@@ -19,12 +19,12 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             Scaffold {
-                          Home()
+                DeliveryScreen()
             }
-//                DeliveryScreen()
+            // Home()
+
 //                OrderScreen()
 //            DetailScreen()
-//            Onboarding()
 
 //            NavGraph()
         }
