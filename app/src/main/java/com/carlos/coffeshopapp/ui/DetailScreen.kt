@@ -48,6 +48,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
 import com.carlos.coffeshopapp.R
 import com.carlos.coffeshopapp.ui.theme.BackGroundColor
 import com.carlos.coffeshopapp.ui.theme.BoxIconDetail
@@ -60,9 +61,9 @@ import com.carlos.coffeshopapp.ui.theme.onSizeButtonBackGroundClick
 import com.carlos.coffeshopapp.ui.theme.onSizeButtonClick
 import com.carlos.coffeshopapp.ui.theme.starColor
 
-@Preview(device = "id:pixel_4")
+
 @Composable
-fun DetailScreen() {
+fun DetailScreen(navController: NavController) {
 
     val modifier = Modifier
 

@@ -44,13 +44,14 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.carlos.coffeshopapp.R
 import com.carlos.coffeshopapp.ui.theme.BackGroundColor
 import com.carlos.coffeshopapp.ui.theme.IconColor
 
-@Preview(device = "id:pixel_4")
+
 @Composable
-fun OrderScreen() {
+fun OrderScreen(navController: NavController) {
     val modifier = Modifier
 
     val isButtonEnabled = remember { mutableStateOf(false) }

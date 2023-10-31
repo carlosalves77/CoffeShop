@@ -2,6 +2,7 @@ package com.carlos.coffeshopapp.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -29,12 +30,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
 import com.carlos.coffeshopapp.R
 import com.carlos.coffeshopapp.ui.theme.Orange
 
-@Preview(device = "id:pixel_4")
+
 @Composable
-fun Onboarding() {
+fun Onboarding(navController: NavController) {
     val modifier = Modifier
     val isButtonEnabled = remember { mutableStateOf(true) }
 
@@ -95,7 +97,9 @@ fun Onboarding() {
             )
             Spacer(modifier.size(10.dp))
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    navController.navigate("Home")
+                },
                 modifier
                     .fillMaxWidth()
                     .height(70.dp)

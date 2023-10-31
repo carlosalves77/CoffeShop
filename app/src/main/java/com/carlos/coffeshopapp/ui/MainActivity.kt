@@ -15,14 +15,18 @@ class MainActivity : ComponentActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
+
+
         setContent {
             Scaffold {
-                DeliveryScreen()
+                          Home()
             }
+//                DeliveryScreen()
 //                OrderScreen()
 //            DetailScreen()
 //            Onboarding()
-//            Home()
+
+//            NavGraph()
         }
     }
 }
