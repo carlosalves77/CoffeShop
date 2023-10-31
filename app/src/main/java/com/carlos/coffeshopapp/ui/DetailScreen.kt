@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,7 +17,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -36,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -46,9 +48,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.core.view.KeyEventDispatcher.Component
 import com.carlos.coffeshopapp.R
-import com.carlos.coffeshopapp.model.SizeButton
 import com.carlos.coffeshopapp.ui.theme.BackGroundColor
 import com.carlos.coffeshopapp.ui.theme.BoxIconDetail
 import com.carlos.coffeshopapp.ui.theme.CoffeeNamePlusList
@@ -69,14 +69,11 @@ fun DetailScreen() {
     var onClickFavorite by remember {
         mutableStateOf(false)
     }
-
-    var isButtonSizeActivate by remember {
-        mutableStateOf(false)
-    }
+    var selectedIndex by remember { mutableIntStateOf(1) }
 
 
     val buttonSizeList = listOf(
-        "S", "M", "L"
+        "P", "M", "G"
     )
 
     val interactionSource = remember {
@@ -87,8 +84,10 @@ fun DetailScreen() {
     Column(
         modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .background(BackGroundColor)
     ) {
+
         Row(
             modifier
                 .fillMaxWidth()
@@ -105,7 +104,7 @@ fun DetailScreen() {
                 tint = IconColor,
             )
             Text(
-                text = "Detail",
+                text = "Detalhe",
                 fontFamily = FontFamily(Font(R.font.sora_bold, FontWeight(800))),
                 color = IconColor,
                 fontSize = 22.sp
@@ -139,9 +138,9 @@ fun DetailScreen() {
                 contentScale = ContentScale.Crop
             )
         }
+
         ConstraintLayout(
             modifier
-                .fillMaxSize()
                 .padding(horizontal = 30.dp)
         ) {
 
@@ -154,7 +153,8 @@ fun DetailScreen() {
                 descriptionTxt,
                 descriptionResumeText,
                 sizeText,
-                rowSizeContainer
+                rowSizeContainer,
+
             ) = createRefs()
 
             Text(
@@ -170,7 +170,7 @@ fun DetailScreen() {
                 fontSize = 20.sp
             )
             Text(
-                text = "with Chocolate",
+                text = "Com Chocolate",
                 modifier
                     .padding(top = 5.dp, start = 1.dp)
                     .constrainAs(complementCoffeeTxt) {
@@ -228,7 +228,7 @@ fun DetailScreen() {
                 Box(
                     modifier
                         .size(44.dp)
-                        .background(BoxIconDetail, RoundedCornerShape(14.dp))
+                        .background(Color(0xFFF9F9F9), RoundedCornerShape(14.dp))
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.coffeeicon),
@@ -243,7 +243,7 @@ fun DetailScreen() {
                 Box(
                     modifier
                         .size(44.dp)
-                        .background(BoxIconDetail, RoundedCornerShape(14.dp)),
+                        .background(Color(0xFFF9F9F9), RoundedCornerShape(14.dp)),
 
                     ) {
                     Image(
@@ -296,7 +296,7 @@ fun DetailScreen() {
                 fontSize = 16.sp
             )
             Text(
-                text = "Size",
+                text = "Tamanho",
                 modifier
                     .padding(top = 10.dp)
                     .constrainAs(sizeText) {
@@ -307,7 +307,7 @@ fun DetailScreen() {
                 color = IconColor,
                 fontSize = 20.sp
             )
-            Row (
+            Row(
                 modifier
                     .padding(top = 10.dp)
                     .fillMaxWidth()
@@ -319,30 +319,28 @@ fun DetailScreen() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 buttonSizeList.forEachIndexed { index, component ->
-
-                    Row (
+                    val isSelected = index == selectedIndex
+                    Row(
                         modifier
                             .border(
                                 border = BorderStroke(
                                     1.dp,
-                                    if (isButtonSizeActivate) onSizeButtonClick else SizeButton
+                                    if (isSelected) onSizeButtonClick else SizeButton
                                 ),
                                 shape = RoundedCornerShape(12.dp)
                             )
                             .size(96.dp, 43.dp)
-                            .background(if (isButtonSizeActivate) onSizeButtonBackGroundClick else Color.White)
+                            .background(if (isSelected) onSizeButtonBackGroundClick else Color.White)
                             .clickable(indication = null, interactionSource = interactionSource) {
-                                isButtonSizeActivate = !isButtonSizeActivate
-
-                            }
-                        ,
+                                selectedIndex = index
+                            },
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically
-                    ){
+                    ) {
                         Text(
                             text = component,
                             fontFamily = FontFamily(Font(R.font.sora_regular, FontWeight(400))),
-                            color = if (isButtonSizeActivate) onSizeButtonClick else IconColor,
+                            color = if (isSelected) onSizeButtonClick else IconColor,
                             fontSize = 14.sp
                         )
                     }
@@ -350,7 +348,83 @@ fun DetailScreen() {
                 }
             }
 
+
         }
+
+        Box(
+            modifier
+                .padding(top = 20.dp)
+                .fillMaxWidth()
+                .shadow(
+                    elevation = 24.dp,
+                    spotColor = Color(0x40E4E4E4),
+                    ambientColor = Color(0x40E4E4E4)
+                )
+                .height(141.dp)
+                .clip(shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
+                .background(Color.White)
+        ) {
+            Row(
+                modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp, start = 30.dp, end = 30.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column() {
+                    Text(
+                        text = "Preço",
+                        fontSize = 14.sp,
+                        fontFamily = FontFamily(Font(R.font.sora_medium)),
+                        fontWeight = FontWeight(400),
+                        color = Color(0xFF9B9B9B),
+                    )
+                    Text(
+                        text = "$ 4.53",
+
+                        fontSize = 18.sp,
+                        fontFamily = FontFamily(Font(R.font.sora_bold)),
+                        fontWeight = FontWeight(600),
+                        color = Color(0xFFC67C4E),
+
+
+                        )
+
+                }
+
+                Row(
+                    modifier
+                        .width(217.dp)
+                        .height(62.dp)
+                        .clickable {
+
+                        }
+                        .background(
+                            color = Color(0xFFC67C4E),
+                            shape = RoundedCornerShape(size = 16.dp)
+                        ),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        10.dp,
+                        Alignment.CenterHorizontally
+                    ),
+                    verticalAlignment = Alignment.CenterVertically,
+
+                    ) {
+                    Text(
+                        text = "Comprar agora",
+                        fontSize = 16.sp,
+                        fontFamily = FontFamily(Font(R.font.sora_bold)),
+                        fontWeight = FontWeight(600),
+                        color = Color(0xFFFFFFFF),
+                    )
+
+                }
+            }
+
+        }
+
+
     }
+
 
 }
