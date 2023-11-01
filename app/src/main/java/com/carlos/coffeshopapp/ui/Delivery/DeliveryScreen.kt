@@ -56,7 +56,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 fun DeliveryScreen() {
     val modifier = Modifier
     val unibra = LatLng(-8.053865337579085, -34.893402490353786)
-    val deliveryguy = LatLng(  -8.056640376972373, -34.892880078432974)
+    val deliveryguy = LatLng(-8.056640376972373, -34.892880078432974)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(unibra, 18f)
     }
@@ -86,11 +86,9 @@ fun DeliveryScreen() {
                     color = Color(0xFFFFFFFF),
                     shape = RoundedCornerShape(size = 14.dp)
                 )
-                .clickable(indication = null, interactionSource =   MutableInteractionSource()) {
+                .clickable(indication = null, interactionSource = MutableInteractionSource()) {
 
-                }
-
-            ,
+                },
             horizontalArrangement = Arrangement.spacedBy(0.dp, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -128,11 +126,9 @@ fun DeliveryScreen() {
                     color = Color(0xFFFFFFFF),
                     shape = RoundedCornerShape(size = 14.dp)
                 )
-                .clickable(indication = null, interactionSource =   MutableInteractionSource()) {
+                .clickable(indication = null, interactionSource = MutableInteractionSource()) {
 
-                }
-
-            ,
+                },
             horizontalArrangement = Arrangement.spacedBy(0.dp, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -174,8 +170,7 @@ fun DeliveryScreen() {
                     LatLng(-8.053931770581892, -34.893807172195814),
                     LatLng(-8.053850925378557, -34.89369002141116),
                     LatLng(-8.053865337579085, -34.893402490353786),
-                )
-                ,color = Color(0xFFC67C4E)
+                ), color = Color(0xFFC67C4E)
             )
 
 
@@ -324,9 +319,9 @@ fun DeliveryScreen() {
                             contentScale = ContentScale.FillBounds
                         )
                         Spacer(Modifier.padding(start = 12.dp))
-                        Column (modifier
-                            .height(46.dp)
-                            ,
+                        Column(
+                            modifier
+                                .height(46.dp),
                             verticalArrangement = Arrangement.SpaceBetween,
                             horizontalAlignment = Alignment.Start,
                         ) {
@@ -350,13 +345,18 @@ fun DeliveryScreen() {
                                 )
                         }
                     }
-                    Row (modifier
-                        .border(width = 1.dp, color = Color(0xFFDEDEDE), shape = RoundedCornerShape(size = 14.dp))
-                        .width(54.dp)
-                        .height(54.dp),
+                    Row(
+                        modifier
+                            .border(
+                                width = 1.dp,
+                                color = Color(0xFFDEDEDE),
+                                shape = RoundedCornerShape(size = 14.dp)
+                            )
+                            .width(54.dp)
+                            .height(54.dp),
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically
-                    ){
+                    ) {
                         Image(
                             painter = painterResource(id = R.drawable.telpon),
                             contentDescription = "telpon",

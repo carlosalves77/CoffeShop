@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -44,17 +45,21 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.carlos.coffeshopapp.R
 import com.carlos.coffeshopapp.ui.theme.BackGroundColor
 import com.carlos.coffeshopapp.ui.theme.IconColor
 
-
+// navController: NavController
+@Preview
 @Composable
-fun OrderScreen(navController: NavController) {
+fun OrderScreen() {
     val modifier = Modifier
 
     val isButtonEnabled = remember { mutableStateOf(false) }
+    val value = remember { mutableIntStateOf(1) }
+    if (value.intValue < 1) value.intValue = 1
+
 
     Column(
         modifier
@@ -68,27 +73,32 @@ fun OrderScreen(navController: NavController) {
                 .padding(top = 55.dp, start = 24.dp, end = 24.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                Icons.Default.KeyboardArrowLeft,
-                contentDescription = "BackButton",
-                modifier
-                    .size(38.dp)
-                    .clickable {
-
+            ConstraintLayout(modifier.fillMaxSize()) {
+                val (icon, text) = createRefs()
+                Icon(
+                    Icons.Default.KeyboardArrowLeft,
+                    contentDescription = "BackButton",
+                    modifier
+                        .size(38.dp)
+                        .constrainAs(icon) {
+                            start.linkTo(parent.start)
+                            top.linkTo(parent.top)
+                        },
+                    tint = IconColor
+                )
+                Text(
+                    text = "Ordem",
+                    modifier.constrainAs(text) {
+                        start.linkTo(parent.start)
+                        top.linkTo(parent.top)
+                        end.linkTo(parent.end)
                     },
-                tint = IconColor,
-            )
-            Text(
-                text = "Ordem",
-                modifier
-                    .fillMaxWidth(),
-                fontFamily = FontFamily(Font(R.font.sora_bold, FontWeight(800))),
-                color = IconColor,
-                fontSize = 22.sp,
-                textAlign = TextAlign.Center
-
-            )
-
+                    fontFamily = FontFamily(Font(R.font.sora_bold, FontWeight(800))),
+                    color = IconColor,
+                    fontSize = 22.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
         Spacer(modifier.padding(top = 25.dp))
         Row(
@@ -330,6 +340,12 @@ fun OrderScreen(navController: NavController) {
                         )
                         .width(28.dp)
                         .height(28.dp)
+                        .clickable(
+                            indication = null,
+                            interactionSource = MutableInteractionSource()
+                        ) {
+                            value.intValue--
+                        }
                         .background(
                             color = Color(0xFFFFFFFF),
                             shape = RoundedCornerShape(size = 20.dp)
@@ -345,7 +361,7 @@ fun OrderScreen(navController: NavController) {
                 }
 
                 Text(
-                    text = "1",
+                    text = "${value.intValue}",
                     modifier.padding(start = 12.dp, end = 12.dp),
                     fontSize = 14.sp,
                     fontFamily = FontFamily(Font(R.font.sora_bold)),
@@ -362,6 +378,12 @@ fun OrderScreen(navController: NavController) {
                             shape = RoundedCornerShape(size = 20.dp)
                         )
                         .width(28.dp)
+                        .clickable(
+                            indication = null,
+                            interactionSource = MutableInteractionSource()
+                        ) {
+                            value.intValue++
+                        }
                         .height(28.dp)
                         .background(
                             color = Color(0xFFFFFFFF),
@@ -431,7 +453,7 @@ fun OrderScreen(navController: NavController) {
                 modifier
                     .padding(end = 18.dp)
                     .size(26.dp)
-                    .clickable(indication = null, interactionSource =   MutableInteractionSource()){
+                    .clickable(indication = null, interactionSource = MutableInteractionSource()) {
 
 
                     },
@@ -458,7 +480,6 @@ fun OrderScreen(navController: NavController) {
         ) {
             Text(
                 text = "Preço",
-
                 fontSize = 14.sp,
                 fontFamily = FontFamily(Font(R.font.sora_regular)),
                 fontWeight = FontWeight(400),
@@ -467,7 +488,6 @@ fun OrderScreen(navController: NavController) {
                 )
             Text(
                 text = "$ 4.53",
-
                 fontSize = 14.sp,
                 fontFamily = FontFamily(Font(R.font.sora_bold)),
                 fontWeight = FontWeight(600),
@@ -670,16 +690,19 @@ fun OrderScreen(navController: NavController) {
                     .fillMaxWidth()
                     .padding(start = 30.dp, end = 30.dp)
                     .height(62.dp)
-                    .background(color = Color(0xFFC67C4E), shape = RoundedCornerShape(size = 16.dp)),
+                    .background(
+                        color = Color(0xFFC67C4E),
+                        shape = RoundedCornerShape(size = 16.dp)
+                    ),
                 horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     text = "Finalizar",
-                        fontSize = 16.sp,
-                        fontFamily = FontFamily(Font(R.font.sora_bold)),
-                        fontWeight = FontWeight(600),
-                        color = Color(0xFFFFFFFF),
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily(Font(R.font.sora_bold)),
+                    fontWeight = FontWeight(600),
+                    color = Color(0xFFFFFFFF),
                 )
             }
 

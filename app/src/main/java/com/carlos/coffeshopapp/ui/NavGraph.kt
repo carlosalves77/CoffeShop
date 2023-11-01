@@ -1,15 +1,15 @@
 package com.carlos.coffeshopapp.ui
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun NavGraph() {
+fun NavGraph(navController: NavHostController) {
 
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "Onboarding") {
+    NavHost(navController = navController, startDestination = "Home") {
 
         composable(route = "Onboarding") {
             Onboarding(navController)
@@ -24,7 +24,7 @@ fun NavGraph() {
         }
 
         composable(route = "OrderScreen") {
-            OrderScreen(navController)
+//            OrderScreen(navController)
         }
 
     }
