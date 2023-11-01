@@ -1,4 +1,4 @@
-package com.carlos.coffeshopapp.ui
+package com.carlos.coffeshopapp.ui.Delivery
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -7,7 +7,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,20 +19,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.BottomSheetScaffold
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -43,37 +40,31 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.LifecycleCoroutineScope
 import com.carlos.coffeshopapp.R
+import com.carlos.coffeshopapp.ui.Delivery.components.MapMarker
 import com.carlos.coffeshopapp.ui.theme.IconColor
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.Polyline
 import com.google.maps.android.compose.rememberCameraPositionState
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(device = "id:pixel_4")
 @Composable
 fun DeliveryScreen() {
-    val singapore = LatLng(1.35, 103.87)
+    val modifier = Modifier
+    val unibra = LatLng(-8.053865337579085, -34.893402490353786)
+    val deliveryguy = LatLng(  -8.056640376972373, -34.892880078432974)
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(singapore, 10f)
+        position = CameraPosition.fromLatLngZoom(unibra, 18f)
     }
-
-    val scope = rememberCoroutineScope()
     val scaffoldState = rememberBottomSheetScaffoldState()
 
-    val modifier = Modifier
 
     ConstraintLayout(modifier.fillMaxSize()) {
-        val (backButton, locationButton, bottomSheet) = createRefs()
+        val (backButton, locationButton) = createRefs()
 
 
         Row(
@@ -94,7 +85,12 @@ fun DeliveryScreen() {
                 .background(
                     color = Color(0xFFFFFFFF),
                     shape = RoundedCornerShape(size = 14.dp)
-                ),
+                )
+                .clickable(indication = null, interactionSource =   MutableInteractionSource()) {
+
+                }
+
+            ,
             horizontalArrangement = Arrangement.spacedBy(0.dp, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -131,13 +127,18 @@ fun DeliveryScreen() {
                 .background(
                     color = Color(0xFFFFFFFF),
                     shape = RoundedCornerShape(size = 14.dp)
-                ),
+                )
+                .clickable(indication = null, interactionSource =   MutableInteractionSource()) {
+
+                }
+
+            ,
             horizontalArrangement = Arrangement.spacedBy(0.dp, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Image(
                 painter = painterResource(id = R.drawable.gps),
-                contentDescription = "Coffee Icon",
+                contentDescription = "Location",
                 modifier
                     .size(24.dp)
                     .fillMaxSize()
@@ -150,11 +151,34 @@ fun DeliveryScreen() {
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState
         ) {
-            Marker(
-                state = MarkerState(position = singapore),
-                title = "Singapore",
-                snippet = "Marker in Singapore"
+
+            MapMarker(
+                position = unibra,
+                context = LocalContext.current,
+                title = "Destinatário",
+                iconResourceId = R.drawable.location
             )
+
+            MapMarker(
+                position = deliveryguy,
+                context = LocalContext.current,
+                title = "Entregador",
+                iconResourceId = R.drawable.deliveryguymaps
+            )
+
+            Polyline(
+                points = listOf(
+                    LatLng(-8.05648165518229, -34.89295009779546),
+                    LatLng(-8.056048431379832, -34.89427374497165),
+                    LatLng(-8.054094632608294, -34.893900656155814),
+                    LatLng(-8.053931770581892, -34.893807172195814),
+                    LatLng(-8.053850925378557, -34.89369002141116),
+                    LatLng(-8.053865337579085, -34.893402490353786),
+                )
+                ,color = Color(0xFFC67C4E)
+            )
+
+
         }
 
 
