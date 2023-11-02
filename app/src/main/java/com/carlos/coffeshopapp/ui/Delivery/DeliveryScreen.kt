@@ -86,7 +86,7 @@ fun DeliveryScreen(navController: NavController) {
                     shape = RoundedCornerShape(size = 14.dp)
                 )
                 .clickable(indication = null, interactionSource = MutableInteractionSource()) {
-                    navController.popBackStack()
+                    navController.navigate("BottomNavigation")
                 },
             horizontalArrangement = Arrangement.spacedBy(0.dp, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically,
@@ -170,7 +170,6 @@ fun DeliveryScreen(navController: NavController) {
 
     }
 
-
     BottomSheetScaffold(
         sheetContent = {
             Column(
@@ -181,19 +180,29 @@ fun DeliveryScreen(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "10 minutos atrás",
+                    text = "2 minutos para chegada",
                     fontSize = 16.sp,
                     fontFamily = FontFamily(Font(R.font.sora_bold)),
                     fontWeight = FontWeight(600),
                     color = Color(0xFF303336),
                 )
-                Text(
-                    text = "Entregador. Carlos Alves",
-                    fontSize = 12.sp,
-                    fontFamily = FontFamily(Font(R.font.sora_medium)),
-                    fontWeight = FontWeight(400),
-                    color = Color(0xFF808080),
-                )
+                Row (verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = "Entrega para${" "}",
+                        fontSize = 12.sp,
+                        fontFamily = FontFamily(Font(R.font.sora_medium)),
+                        fontWeight = FontWeight(400),
+                        color = Color(0xFF808080),
+                    )
+                    Text(
+                        text = "Carlos Alves",
+                        fontSize = 14.sp,
+                        fontFamily = FontFamily(Font(R.font.sora_bold)),
+                        fontWeight = FontWeight(400),
+                        color = Color(0xFF303336),
+                    )
+                }
+
                 Spacer(Modifier.height(20.dp))
                 Row(
                     modifier.fillMaxWidth(),

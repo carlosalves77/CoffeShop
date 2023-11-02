@@ -5,10 +5,12 @@ import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.Person
 import com.carlos.coffeshopapp.R
 
 
@@ -18,7 +20,6 @@ val items = listOf(
         selectedIcon = Icons.Filled.Home,
         unselectedIcon = Icons.Outlined.Home,
         hasNews = false,
-        page = "Home"
     ),
     BottomNavigationItem(
         underSelectedICon = R.drawable.retangle,
@@ -38,4 +39,5 @@ val items = listOf(
         unselectedIcon = Icons.Outlined.Notifications,
         hasNews = false
     ),
+
 )

@@ -1,6 +1,7 @@
 package com.carlos.coffeshopapp.ui.BottomNavigation
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -40,6 +41,7 @@ fun BottomNavigation(
     }
 
 
+
     val colors = NavigationBarItemDefaults.colors(
         selectedIconColor = Color(0xFFC67C4E),
         unselectedIconColor = Color(0xFF8D8D8D),
@@ -53,6 +55,7 @@ fun BottomNavigation(
         NavigationBar(
             modifier
                 .clip(RoundedCornerShape(size = 24.dp))
+                .width(375.dp)
                 .shadow(
                     elevation = 24.dp,
                     spotColor = Color(0x40E4E4E4),

@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -36,6 +37,7 @@ import com.carlos.coffeshopapp.R
 
 @Composable
 fun Onboarding(navController: NavController) {
+
 
 
     val modifier = Modifier
@@ -92,6 +94,7 @@ fun Onboarding(navController: NavController) {
                     .height(62.dp)
                     .clickable {
                     navController.navigate("BottomNavigation")
+
                     }
                     .background(
                         color = Color(0xFFC67C4E),

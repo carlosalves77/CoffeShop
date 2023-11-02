@@ -47,8 +47,6 @@ fun CustomCoffeeListItem(
     navController: NavController
 ) {
 
-
-
     val modifier = Modifier
     Column(
         modifier
