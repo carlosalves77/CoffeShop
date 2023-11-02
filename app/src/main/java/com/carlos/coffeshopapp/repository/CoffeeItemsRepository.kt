@@ -13,6 +13,7 @@ object CoffeeItemsRepository  {
             coffeeImage = R.drawable.c1,
             coffeePrice = "$ 4.53",
             coffeeStars = "4.8"
+
         ),
         CoffeeItems(
             coffeeName = "Capppucino",
@@ -41,6 +42,7 @@ object CoffeeItemsRepository  {
             coffeeImage = R.drawable.c1,
             coffeePrice = "$ 4.75",
             coffeeStars = "4.8"
+
         ),
         CoffeeItems(
             coffeeName = "Capppucino",

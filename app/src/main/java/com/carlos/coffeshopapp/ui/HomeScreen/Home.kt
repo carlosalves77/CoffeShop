@@ -1,4 +1,4 @@
-package com.carlos.coffeshopapp.ui
+package com.carlos.coffeshopapp.ui.HomeScreen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -24,23 +24,16 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.DockedSearchBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemColors
-import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -53,15 +46,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import com.carlos.coffeshopapp.R
 import com.carlos.coffeshopapp.components.CustomCoffeeListItem
 import com.carlos.coffeshopapp.components.CustomCoffeeTypeItem
 import com.carlos.coffeshopapp.repository.CoffeeItemsRepository
 import com.carlos.coffeshopapp.repository.CoffeeTypeRepository
-import com.carlos.coffeshopapp.ui.BottomNavigation.items
 import com.carlos.coffeshopapp.ui.theme.BackGroundColor
 import com.carlos.coffeshopapp.ui.theme.GrandientBackFirst
 import com.carlos.coffeshopapp.ui.theme.GrandientBackTwo
@@ -71,15 +60,8 @@ import com.carlos.coffeshopapp.ui.theme.Orange
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(device = "id:pixel_4")
 @Composable
-//navController: NavController
-fun Home() {
-
-    var selectedItemIndex by rememberSaveable {
-        mutableIntStateOf(0)
-    }
-
+fun Home(navController: NavController) {
 
     val modifier = Modifier
 
@@ -97,50 +79,6 @@ fun Home() {
     val coffeeType = remember { CoffeeTypeRepository.coffeeList }
     val coffeeList = remember { CoffeeItemsRepository.coffeeListItems }
 
-
-    val colors = NavigationBarItemDefaults.colors(
-        selectedIconColor = Color(0xFFC67C4E),
-        unselectedIconColor = Color(0xFF8D8D8D),
-        indicatorColor = Color.White,
-        unselectedTextColor = Color.Transparent,
-        disabledIconColor = Color.White,
-        disabledTextColor = Color.Transparent,
-    )
-
-    Scaffold(bottomBar = {
-        NavigationBar(
-            modifier
-                .clip(RoundedCornerShape(size = 24.dp))
-                .shadow(
-                    elevation = 24.dp,
-                    spotColor = Color(0x40E4E4E4),
-                    ambientColor = Color(0x40E4E4E4)
-                ),
-            containerColor = Color.White,
-            tonalElevation = 24.dp,
-            contentColor = Color.Red
-        ) {
-            items.forEachIndexed { index, item ->
-                NavigationBarItem(
-                    selected = selectedItemIndex == index,
-                    onClick = {
-                        selectedItemIndex = index
-                    },
-                    label = {
-                        // TODO - Label for NavigationBar
-                    },
-                    icon = {
-                        Icon(
-                            imageVector = if (index == selectedItemIndex) item.selectedIcon else item.unselectedIcon,
-                            contentDescription = null
-                        )
-                    },
-                    colors = colors
-                )
-
-            }
-        }
-    }) {
 
         Column(
             modifier
@@ -164,7 +102,7 @@ fun Home() {
                 Row(
                     modifier
                         .fillMaxWidth()
-                        .padding(top = 63.dp, start = 30.dp, end = 30.dp),
+                        .padding(top = 40.dp, start = 30.dp, end = 30.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -244,7 +182,7 @@ fun Home() {
             ) {
                 Box(
                     modifier
-                        .offset(10.dp, (-60).dp)
+                        .offset(0.dp, (-70).dp)
                         .fillMaxWidth()
                         .padding(start = 30.dp, end = 30.dp)
                         .background(color = Color.White, shape = RoundedCornerShape(22.dp))
@@ -286,7 +224,7 @@ fun Home() {
                 LazyRow(
                     modifier
                         .padding(start = 30.dp)
-                        .offset(0.dp, (-30).dp),
+                        .offset(0.dp, (-40).dp),
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     itemsIndexed(items = coffeeType) { index, item ->
@@ -300,7 +238,7 @@ fun Home() {
                     modifier
                         .fillMaxSize()
                         .padding(top = 15.dp, start = 30.dp, end = 30.dp)
-                        .offset(0.dp, (-30).dp),
+                        .offset(0.dp, (-40).dp),
                 ) {
 
                     LazyVerticalGrid(
@@ -309,7 +247,7 @@ fun Home() {
                         horizontalArrangement = Arrangement.spacedBy(6.dp),
                     ) {
                         items(items = coffeeList, itemContent = {
-                            CustomCoffeeListItem(coffeeItems = it)
+                            CustomCoffeeListItem(coffeeItems = it, navController)
                         })
                     }
                 }
@@ -318,6 +256,6 @@ fun Home() {
 
         }
 
-    }
+
 }
 

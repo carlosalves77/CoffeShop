@@ -1,4 +1,4 @@
-package com.carlos.coffeshopapp.ui
+package com.carlos.coffeshopapp.ui.DetailScreen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -44,14 +44,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.carlos.coffeshopapp.R
 import com.carlos.coffeshopapp.ui.theme.BackGroundColor
-import com.carlos.coffeshopapp.ui.theme.BoxIconDetail
 import com.carlos.coffeshopapp.ui.theme.CoffeeNamePlusList
 import com.carlos.coffeshopapp.ui.theme.DescriptionText
 import com.carlos.coffeshopapp.ui.theme.IconColor
@@ -101,7 +99,10 @@ fun DetailScreen(navController: NavController) {
                 contentDescription = "BackButton",
                 modifier
                     .size(38.dp)
-                    .clickable { },
+                    .clickable(indication = null, interactionSource = interactionSource) {
+
+                        navController.popBackStack()
+                    },
                 tint = IconColor,
             )
             Text(
@@ -285,7 +286,7 @@ fun DetailScreen(navController: NavController) {
                 fontSize = 20.sp
             )
             Text(
-                text = "A cappuccino is an approximately 150 ml (5 oz) beverage, with 25 ml of espresso coffee and 85ml of fresh milk the fo.. Read More",
+                text = "Um cappuccino é uma bebida de aproximadamente 150 ml (5 onças), sendo 25 ml de café expresso e 85 ml de leite fresco... Leia Mais",
                 modifier
                     .padding(top = 15.dp)
                     .constrainAs(descriptionResumeText) {
@@ -397,8 +398,8 @@ fun DetailScreen(navController: NavController) {
                     modifier
                         .width(217.dp)
                         .height(62.dp)
-                        .clickable {
-
+                        .clickable(indication = null, interactionSource = MutableInteractionSource()) {
+                           navController.navigate("OrderScreen")
                         }
                         .background(
                             color = Color(0xFFC67C4E),

@@ -6,7 +6,6 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.outlined.DateRange
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Notifications
@@ -18,7 +17,8 @@ val items = listOf(
         underSelectedICon = R.drawable.retangle,
         selectedIcon = Icons.Filled.Home,
         unselectedIcon = Icons.Outlined.Home,
-        hasNews = false
+        hasNews = false,
+        page = "Home"
     ),
     BottomNavigationItem(
         underSelectedICon = R.drawable.retangle,

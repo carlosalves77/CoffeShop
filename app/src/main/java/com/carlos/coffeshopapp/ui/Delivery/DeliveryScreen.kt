@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
 import com.carlos.coffeshopapp.R
 import com.carlos.coffeshopapp.ui.Delivery.components.MapMarker
 import com.carlos.coffeshopapp.ui.theme.IconColor
@@ -51,9 +52,8 @@ import com.google.maps.android.compose.rememberCameraPositionState
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(device = "id:pixel_4")
 @Composable
-fun DeliveryScreen() {
+fun DeliveryScreen(navController: NavController) {
     val modifier = Modifier
     val unibra = LatLng(-8.053865337579085, -34.893402490353786)
     val deliveryguy = LatLng(-8.056640376972373, -34.892880078432974)
@@ -65,7 +65,6 @@ fun DeliveryScreen() {
 
     ConstraintLayout(modifier.fillMaxSize()) {
         val (backButton, locationButton) = createRefs()
-
 
         Row(
             modifier
@@ -87,7 +86,7 @@ fun DeliveryScreen() {
                     shape = RoundedCornerShape(size = 14.dp)
                 )
                 .clickable(indication = null, interactionSource = MutableInteractionSource()) {
-
+                    navController.popBackStack()
                 },
             horizontalArrangement = Arrangement.spacedBy(0.dp, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically,
@@ -96,14 +95,7 @@ fun DeliveryScreen() {
                 Icons.Default.KeyboardArrowLeft,
                 contentDescription = "BackButton",
                 modifier
-                    .size(38.dp)
-                    .clickable(
-                        indication = null,
-                        interactionSource = MutableInteractionSource()
-                    ) {
-
-
-                    },
+                    .size(38.dp),
                 tint = IconColor,
             )
         }
@@ -138,7 +130,6 @@ fun DeliveryScreen() {
                 modifier
                     .size(24.dp)
                     .fillMaxSize()
-
             )
 
         }

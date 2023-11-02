@@ -2,6 +2,7 @@ package com.carlos.coffeshopapp.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.carlos.coffeshopapp.R
 import com.carlos.coffeshopapp.model.CoffeeItems
 import com.carlos.coffeshopapp.ui.theme.CoffeeNameList
@@ -39,7 +42,12 @@ import com.carlos.coffeshopapp.ui.theme.ValidationContent
 
 
 @Composable
-fun CustomCoffeeListItem(coffeeItems: CoffeeItems) {
+fun CustomCoffeeListItem(
+    coffeeItems: CoffeeItems,
+    navController: NavController
+) {
+
+
 
     val modifier = Modifier
     Column(
@@ -108,7 +116,7 @@ fun CustomCoffeeListItem(coffeeItems: CoffeeItems) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-//                    text = coffeeItems.coffeePrice,
+//                   text = coffeeItems.coffeePrice,
                     text = "Café",
                     fontWeight = FontWeight(600),
                     color = CoffeePriceList,
@@ -116,11 +124,16 @@ fun CustomCoffeeListItem(coffeeItems: CoffeeItems) {
                 )
                 Box(
                     modifier
+                        .clickable {
+                            navController.navigate("DetailScreen")
+                        }
                         .background(
                             color = Orange,
                             shape = RoundedCornerShape(10.dp)
                         )
-                        .size(32.dp),
+                        .size(32.dp)
+
+                    ,
                     contentAlignment = Center
                 ) {
                     Icon(

@@ -1,4 +1,4 @@
-package com.carlos.coffeshopapp.ui
+package com.carlos.coffeshopapp.ui.OrderScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -46,14 +46,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
 import com.carlos.coffeshopapp.R
 import com.carlos.coffeshopapp.ui.theme.BackGroundColor
 import com.carlos.coffeshopapp.ui.theme.IconColor
 
-// navController: NavController
-@Preview
+
+
 @Composable
-fun OrderScreen() {
+fun OrderScreen(navController: NavController) {
     val modifier = Modifier
 
     val isButtonEnabled = remember { mutableStateOf(false) }
@@ -80,6 +81,9 @@ fun OrderScreen() {
                     contentDescription = "BackButton",
                     modifier
                         .size(38.dp)
+                        .clickable(indication = null, interactionSource = MutableInteractionSource()) {
+                            navController.popBackStack()
+                        }
                         .constrainAs(icon) {
                             start.linkTo(parent.start)
                             top.linkTo(parent.top)
@@ -690,6 +694,9 @@ fun OrderScreen() {
                     .fillMaxWidth()
                     .padding(start = 30.dp, end = 30.dp)
                     .height(62.dp)
+                    .clickable(indication = null, interactionSource = MutableInteractionSource()) {
+                        navController.navigate("DeliveryScreen")
+                    }
                     .background(
                         color = Color(0xFFC67C4E),
                         shape = RoundedCornerShape(size = 16.dp)
