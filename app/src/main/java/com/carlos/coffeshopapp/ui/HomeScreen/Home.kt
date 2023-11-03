@@ -27,7 +27,10 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.DockedSearchBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.SearchBarColors
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -148,7 +151,8 @@ fun Home(navController: NavController) {
                     active = it
                 },
                 modifier
-                    .padding(top = 28.dp, start = 30.dp, end = 30.dp),
+                    .padding(top = 28.dp, start = 30.dp, end = 30.dp)
+                ,
                 tonalElevation = 0.dp,
                 shape = RoundedCornerShape(14.dp),
                 placeholder = {
@@ -176,7 +180,8 @@ fun Home(navController: NavController) {
                         )
                     }
 
-                }) {
+                },
+            ) {
 
             }
 

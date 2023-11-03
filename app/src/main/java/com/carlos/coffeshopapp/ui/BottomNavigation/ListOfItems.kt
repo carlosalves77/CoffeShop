@@ -17,26 +17,26 @@ import com.carlos.coffeshopapp.R
 val items = listOf(
     BottomNavigationItem(
         underSelectedICon = R.drawable.retangle,
-        selectedIcon = Icons.Filled.Home,
-        unselectedIcon = Icons.Outlined.Home,
+        selectedIcon = R.drawable.homeicon,
+        unselectedIcon = R.drawable.homeiconoutline,
         hasNews = false,
     ),
     BottomNavigationItem(
         underSelectedICon = R.drawable.retangle,
-        selectedIcon = Icons.Filled.Favorite,
-        unselectedIcon = Icons.Outlined.FavoriteBorder,
+        selectedIcon = R.drawable.hearticon,
+        unselectedIcon = R.drawable.hearticonoutline,
         hasNews = false
     ),
     BottomNavigationItem(
         underSelectedICon = R.drawable.retangle,
-        selectedIcon = Icons.Filled.DateRange,
-        unselectedIcon = Icons.Outlined.DateRange,
+        selectedIcon = R.drawable.bagicon,
+        unselectedIcon = R.drawable.bagiconoutline,
         hasNews = false
     ),
     BottomNavigationItem(
         underSelectedICon = R.drawable.retangle,
-        selectedIcon = Icons.Filled.Notifications,
-        unselectedIcon = Icons.Outlined.Notifications,
+        selectedIcon = R.drawable.notificationicon,
+        unselectedIcon = R.drawable.notificationiconoutline,
         hasNews = false
     ),
 

@@ -1,13 +1,21 @@
 package com.carlos.coffeshopapp.ui.BottomNavigation
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalAbsoluteTonalElevation
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -18,10 +26,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.carlos.coffeshopapp.ui.FavoriteScreen.FavoriteScreen
 import com.carlos.coffeshopapp.ui.HomeScreen.Home
+import com.carlos.coffeshopapp.ui.theme.Orange
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -40,16 +50,15 @@ fun BottomNavigation(
         mutableIntStateOf(0)
     }
 
-
-
-    val colors = NavigationBarItemDefaults.colors(
-        selectedIconColor = Color(0xFFC67C4E),
-        unselectedIconColor = Color(0xFF8D8D8D),
-        indicatorColor = Color.White,
-        unselectedTextColor = Color.Transparent,
-        disabledIconColor = Color.White,
-        disabledTextColor = Color.Transparent,
-    )
+//
+//    val colors = NavigationBarItemDefaults.colors(
+//        selectedIconColor = Color(0xFFC67C4E),
+//        unselectedIconColor = Color(0xFF8D8D8D),
+//        indicatorColor = if (selectedItemIndex == index) Color.White else Color.White,
+//        unselectedTextColor = Color.White,
+//        disabledIconColor = Color.Red,
+//        disabledTextColor = Color.Transparent,
+//    )
 
     Scaffold(bottomBar = {
         NavigationBar(
@@ -63,7 +72,6 @@ fun BottomNavigation(
                 ),
             containerColor = Color.White,
             tonalElevation = 24.dp,
-            contentColor = Color.Red
         ) {
             items.forEachIndexed { index, item ->
                 NavigationBarItem(
@@ -73,15 +81,36 @@ fun BottomNavigation(
                         selectedScreen = index
                     },
                     label = {
-                        // TODO - Label for NavigationBar
+
+                        Icon(
+                            painter = painterResource(id = item.underSelectedICon),
+                            contentDescription = "Icons",
+                            modifier
+                                .size(18.dp),
+                            tint = if (index == selectedItemIndex) Color(0xFFC67C4E) else Color.White
+                        )
+
                     },
                     icon = {
                         Icon(
-                            imageVector = if (index == selectedItemIndex) item.selectedIcon else item.unselectedIcon,
-                            contentDescription = null
+                            painter = painterResource(id = if (index == selectedItemIndex) item.selectedIcon else item.unselectedIcon),
+                            contentDescription = "Icons",
+                            modifier
+                                .weight(3f)
+                                .size(24.dp)
                         )
+
                     },
-                    colors = colors
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = Color(0xFFC67C4E),
+                        unselectedIconColor = Color(0xFF8D8D8D),
+                        indicatorColor = Color.White,
+                        unselectedTextColor = Color.White,
+                        disabledIconColor = Color.White,
+                        disabledTextColor = Color.White,
+                    )
+
+
                 )
 
             }
@@ -91,12 +120,15 @@ fun BottomNavigation(
             0 -> {
                 Home(navController = navController)
             }
+
             1 -> {
                 FavoriteScreen()
             }
+
             2 -> {
 
             }
+
             3 -> {
 
             }
