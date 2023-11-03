@@ -54,8 +54,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.carlos.coffeshopapp.R
-import com.carlos.coffeshopapp.components.CustomCoffeeListItem
-import com.carlos.coffeshopapp.components.CustomCoffeeTypeItem
+import com.carlos.coffeshopapp.ui.HomeScreen.components.CustomCoffeeListItem
+import com.carlos.coffeshopapp.ui.HomeScreen.components.CustomCoffeeTypeItem
 import com.carlos.coffeshopapp.repository.CoffeeItemsRepository
 import com.carlos.coffeshopapp.repository.CoffeeTypeRepository
 import com.carlos.coffeshopapp.ui.theme.BackGroundColor
@@ -248,7 +248,8 @@ fun Home(navController: NavController) {
                 modifier
                     .fillMaxSize()
                     .padding(top = 15.dp, start = 30.dp, end = 30.dp)
-                    .offset(0.dp, (-40).dp),
+                    .offset(0.dp, (-40).dp)
+                ,
             ) {
 
                 LazyVerticalGrid(

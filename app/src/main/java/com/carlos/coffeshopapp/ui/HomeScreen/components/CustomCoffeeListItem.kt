@@ -1,4 +1,4 @@
-package com.carlos.coffeshopapp.components
+package com.carlos.coffeshopapp.ui.HomeScreen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

@@ -29,8 +29,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.carlos.coffeshopapp.ui.BagScreen.BagScreen
 import com.carlos.coffeshopapp.ui.FavoriteScreen.FavoriteScreen
 import com.carlos.coffeshopapp.ui.HomeScreen.Home
+import com.carlos.coffeshopapp.ui.NotificationScreen.NotificationScreen
 import com.carlos.coffeshopapp.ui.theme.Orange
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -126,11 +128,11 @@ fun BottomNavigation(
             }
 
             2 -> {
-
+                 BagScreen()
             }
 
             3 -> {
-
+            NotificationScreen()
             }
         }
 
