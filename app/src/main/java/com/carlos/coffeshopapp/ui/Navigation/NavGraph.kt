@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.carlos.coffeshopapp.ui.BagScreen.BagScreen
 import com.carlos.coffeshopapp.ui.BottomNavigation.BottomNavigation
 import com.carlos.coffeshopapp.ui.Delivery.DeliveryScreen
 import com.carlos.coffeshopapp.ui.DetailScreen.DetailScreen
@@ -38,6 +39,10 @@ fun NavGraph(navController: NavHostController) {
 
         composable(route = "DeliveryScreen") {
             DeliveryScreen(navController)
+        }
+
+        composable(route = "BagScreen") {
+            BagScreen(navController)
         }
 
     }

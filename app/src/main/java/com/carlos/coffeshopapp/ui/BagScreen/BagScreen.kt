@@ -1,6 +1,7 @@
 package com.carlos.coffeshopapp.ui.BagScreen
 
 import android.widget.Space
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -36,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
 import com.carlos.coffeshopapp.R
 import com.carlos.coffeshopapp.repository.BagItemsRepository
 import com.carlos.coffeshopapp.repository.CoffeeItemsRepository
@@ -44,11 +46,14 @@ import com.carlos.coffeshopapp.ui.HomeScreen.components.CustomCoffeeListItem
 import com.carlos.coffeshopapp.ui.theme.BackGroundColor
 import com.carlos.coffeshopapp.ui.theme.IconColor
 
-@Preview(showBackground = true)
 @Composable
-fun BagScreen() {
+fun BagScreen(navController: NavController) {
 
     val modifier = Modifier
+
+    BackHandler {
+        navController.navigate("BottomNavigation")
+    }
 
     val bagItemsList = remember { BagItemsRepository.bagListItems }
 
@@ -74,6 +79,7 @@ fun BagScreen() {
                             indication = null,
                             interactionSource = MutableInteractionSource()
                         ) {
+                            navController.navigate("BottomNavigation")
                         }
                         .constrainAs(icon) {
                             start.linkTo(parent.start)
@@ -97,6 +103,7 @@ fun BagScreen() {
         }
         Spacer(modifier.height(30.dp))
         LazyColumn(
+            modifier.padding(bottom = 120.dp),
             contentPadding = PaddingValues(horizontal = 20.dp),
             verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
@@ -104,6 +111,7 @@ fun BagScreen() {
                 CustomCartListItem(bagItems = it)
             })
         }
+
 
 
     }

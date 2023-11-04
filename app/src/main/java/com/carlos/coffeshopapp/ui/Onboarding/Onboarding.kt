@@ -1,5 +1,8 @@
 package com.carlos.coffeshopapp.ui.Onboarding
 
+import android.app.Activity
+import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,7 +41,7 @@ import com.carlos.coffeshopapp.R
 @Composable
 fun Onboarding(navController: NavController) {
 
-
+    val activity = LocalContext.current as Activity
 
     val modifier = Modifier
 
@@ -93,8 +96,7 @@ fun Onboarding(navController: NavController) {
                     .fillMaxWidth()
                     .height(62.dp)
                     .clickable {
-                    navController.navigate("BottomNavigation")
-
+                        navController.navigate("BottomNavigation")
                     }
                     .background(
                         color = Color(0xFFC67C4E),

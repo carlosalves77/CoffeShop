@@ -120,7 +120,7 @@ fun BottomNavigation(
     }) {
         when (selectedScreen) {
             0 -> {
-                Home(navController = navController)
+                Home(navController)
             }
 
             1 -> {
@@ -128,7 +128,7 @@ fun BottomNavigation(
             }
 
             2 -> {
-                 BagScreen()
+                 BagScreen(navController)
             }
 
             3 -> {

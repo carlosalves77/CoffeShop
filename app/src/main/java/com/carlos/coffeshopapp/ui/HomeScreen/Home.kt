@@ -2,7 +2,9 @@ package com.carlos.coffeshopapp.ui.HomeScreen
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -70,8 +72,13 @@ import com.carlos.coffeshopapp.ui.theme.Orange
 @Composable
 fun Home(navController: NavController) {
 
+    val activity = LocalContext.current as Activity
 
     val modifier = Modifier
+
+    BackHandler {
+        activity.finish()
+    }
 
     var text by remember {
         mutableStateOf("")

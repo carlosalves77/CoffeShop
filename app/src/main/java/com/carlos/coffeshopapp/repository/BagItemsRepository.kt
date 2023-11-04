@@ -16,7 +16,7 @@ object BagItemsRepository  {
 
         ),
         BagItems(
-            coffeeName = "Capppucino",
+            coffeeName = "Latte",
             coffeeComplement = "Com Vanilla",
             coffeeImage = R.drawable.c2,
             coffeePrice = "$ 4.95",
@@ -29,20 +29,20 @@ object BagItemsRepository  {
 
         ),
         BagItems(
-            coffeeName = "Capppucino",
+            coffeeName = "Machiato",
             coffeeComplement = "Com Avelã",
             coffeeImage = R.drawable.c2,
             coffeePrice = "$ 4.53",
         ),
         BagItems(
-            coffeeName = "Capppucino",
+            coffeeName = "Lait",
             coffeeComplement = "Com Caramelo",
             coffeeImage = R.drawable.c1,
             coffeePrice = "$ 4.75",
 
         ),
         BagItems(
-            coffeeName = "Capppucino",
+            coffeeName = "Machiato",
             coffeeComplement = "Com Chantilly",
             coffeeImage = R.drawable.c2,
             coffeePrice = "$ 5.25",
