@@ -52,15 +52,6 @@ fun BottomNavigation(
         mutableIntStateOf(0)
     }
 
-//
-//    val colors = NavigationBarItemDefaults.colors(
-//        selectedIconColor = Color(0xFFC67C4E),
-//        unselectedIconColor = Color(0xFF8D8D8D),
-//        indicatorColor = if (selectedItemIndex == index) Color.White else Color.White,
-//        unselectedTextColor = Color.White,
-//        disabledIconColor = Color.Red,
-//        disabledTextColor = Color.Transparent,
-//    )
 
     Scaffold(bottomBar = {
         NavigationBar(
@@ -124,7 +115,7 @@ fun BottomNavigation(
             }
 
             1 -> {
-                FavoriteScreen()
+                FavoriteScreen(navController)
             }
 
             2 -> {
@@ -132,7 +123,7 @@ fun BottomNavigation(
             }
 
             3 -> {
-            NotificationScreen()
+            NotificationScreen(navController)
             }
         }
 

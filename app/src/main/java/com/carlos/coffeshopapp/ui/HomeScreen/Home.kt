@@ -261,6 +261,7 @@ fun Home(navController: NavController) {
 
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
+                    modifier.padding(bottom = 95.dp),
                     verticalArrangement = Arrangement.spacedBy(6.dp),
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                 ) {

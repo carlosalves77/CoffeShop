@@ -26,13 +26,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.carlos.coffeshopapp.R
+import androidx.navigation.navArgument
 import com.carlos.coffeshopapp.model.CoffeeItems
 import com.carlos.coffeshopapp.ui.theme.CoffeeNameList
 import com.carlos.coffeshopapp.ui.theme.CoffeeNamePlusList
@@ -115,7 +113,7 @@ fun CustomCoffeeListItem(
             ) {
                 Text(
 //                   text = coffeeItems.coffeePrice,
-                    text = "Café",
+                    text = coffeeItems.coffeePrice,
                     fontWeight = FontWeight(600),
                     color = CoffeePriceList,
                     fontSize = 18.sp
@@ -123,15 +121,16 @@ fun CustomCoffeeListItem(
                 Box(
                     modifier
                         .clickable {
-                            navController.navigate("DetailScreen")
+                            navController.navigate(
+                                "DetailScreen" +
+                                        "/${coffeeItems.coffeeName}/${coffeeItems.coffeeComplement}/${coffeeItems.coffeeImage}/${coffeeItems.coffeePrice}"
+                            )
                         }
                         .background(
                             color = Orange,
                             shape = RoundedCornerShape(10.dp)
                         )
-                        .size(32.dp)
-
-                    ,
+                        .size(32.dp),
                     contentAlignment = Center
                 ) {
                     Icon(

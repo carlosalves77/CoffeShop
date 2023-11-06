@@ -1,5 +1,6 @@
 package com.carlos.coffeshopapp.ui.DetailScreen
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -61,9 +62,16 @@ import com.carlos.coffeshopapp.ui.theme.starColor
 
 
 @Composable
-fun DetailScreen(navController: NavController) {
+fun DetailScreen(
+    navController: NavController,
+    coffeeName: String?,
+    coffeeDescription: String?,
+    coffeeImage: Int?,
+    coffeePrice: String?
+) {
 
     val modifier = Modifier
+
 
     var onClickFavorite by remember {
         mutableStateOf(false)
@@ -74,6 +82,7 @@ fun DetailScreen(navController: NavController) {
     val buttonSizeList = listOf(
         "P", "M", "G"
     )
+
 
     val interactionSource = remember {
         MutableInteractionSource()
@@ -134,7 +143,7 @@ fun DetailScreen(navController: NavController) {
                 .height(226.dp),
         ) {
             Image(
-                painter = painterResource(id = R.drawable.detailcoffeimage),
+                painter = painterResource(id = requireNotNull(coffeeImage)),
                 contentDescription = "Coffee Detail",
                 modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
@@ -160,7 +169,7 @@ fun DetailScreen(navController: NavController) {
             ) = createRefs()
 
             Text(
-                text = "Cappuccino",
+                text = requireNotNull(coffeeName),
                 modifier
                     .padding(top = 15.dp)
                     .constrainAs(txtTitle) {
@@ -172,7 +181,7 @@ fun DetailScreen(navController: NavController) {
                 fontSize = 20.sp
             )
             Text(
-                text = "Com Chocolate",
+                text = requireNotNull(coffeeDescription),
                 modifier
                     .padding(top = 5.dp, start = 1.dp)
                     .constrainAs(complementCoffeeTxt) {
@@ -274,7 +283,7 @@ fun DetailScreen(navController: NavController) {
                     })
 
             Text(
-                text = "Description",
+                text = "Descrição",
                 modifier
                     .padding(top = 15.dp)
                     .constrainAs(descriptionTxt) {
@@ -286,7 +295,7 @@ fun DetailScreen(navController: NavController) {
                 fontSize = 20.sp
             )
             Text(
-                text = "Um cappuccino é uma bebida de aproximadamente 150 ml (5 onças), sendo 25 ml de café expresso e 85 ml de leite fresco... Leia Mais",
+                text = "Um cappuccino é uma bebida de aproximadamente 150 ml (5 colheres), sendo 25 ml de café expresso e 85 ml de leite fresco... Leia Mais",
                 modifier
                     .padding(top = 15.dp)
                     .constrainAs(descriptionResumeText) {
@@ -382,8 +391,7 @@ fun DetailScreen(navController: NavController) {
                         color = Color(0xFF9B9B9B),
                     )
                     Text(
-                        text = "$ 4.53",
-
+                        text = "$coffeePrice",
                         fontSize = 18.sp,
                         fontFamily = FontFamily(Font(R.font.sora_bold)),
                         fontWeight = FontWeight(600),
@@ -398,8 +406,11 @@ fun DetailScreen(navController: NavController) {
                     modifier
                         .width(217.dp)
                         .height(62.dp)
-                        .clickable(indication = null, interactionSource = MutableInteractionSource()) {
-                           navController.navigate("OrderScreen")
+                        .clickable(
+                            indication = null,
+                            interactionSource = MutableInteractionSource()
+                        ) {
+                            navController.navigate("OrderScreen")
                         }
                         .background(
                             color = Color(0xFFC67C4E),
