@@ -71,7 +71,7 @@ fun NotificationScreen(navController: NavController) {
                             indication = null,
                             interactionSource = MutableInteractionSource()
                         ) {
-
+                            navController.navigate("BottomNavigation")
                         }
                         .constrainAs(icon) {
                             start.linkTo(parent.start)
@@ -99,7 +99,7 @@ fun NotificationScreen(navController: NavController) {
             verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             items(items = notificationItemsList, itemContent = {
-                CustomNotificationListItem()
+                CustomNotificationListItem(notificationItems = it)
             })
         }
     }

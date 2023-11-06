@@ -31,10 +31,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.carlos.coffeshopapp.R
+import com.carlos.coffeshopapp.model.NotificationItems
 
-@Preview(showBackground = true)
 @Composable
-fun CustomNotificationListItem() {
+fun CustomNotificationListItem(notificationItems: NotificationItems) {
     val modifier = Modifier
 
     Row(
@@ -50,7 +50,7 @@ fun CustomNotificationListItem() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painter = painterResource(id = R.drawable.c1),
+            painter = painterResource(id = notificationItems.notificationImage),
             contentDescription = "image description",
             modifier
                 .padding(start = 17.dp)
@@ -64,8 +64,8 @@ fun CustomNotificationListItem() {
                 .fillMaxHeight()
         ) {
             Text(
-                text = "Volte a economizar",
-                fontSize = 18.sp,
+                text = notificationItems.notificationName,
+                fontSize = 14.sp,
                 fontFamily = FontFamily(Font(R.font.sora_bold)),
                 fontWeight = FontWeight(600),
                 color = Color(0xFF000000),
@@ -78,8 +78,8 @@ fun CustomNotificationListItem() {
                     .width(200.dp)
             ) {
             Text(
-                text = "Eu ouvi cashback?",
-                fontSize = 14.sp,
+                text = notificationItems.notificationComplement,
+                fontSize = 12.sp,
                 fontFamily = FontFamily(Font(R.font.sora_medium)),
                 fontWeight = FontWeight(400),
                 color = Color(0xFF000000),
@@ -94,7 +94,7 @@ fun CustomNotificationListItem() {
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = "08/11",
+                text = notificationItems.notificationDate,
                 fontSize = 12.sp,
                 fontFamily = FontFamily(Font(R.font.sora_bold)),
                 fontWeight = FontWeight(600),

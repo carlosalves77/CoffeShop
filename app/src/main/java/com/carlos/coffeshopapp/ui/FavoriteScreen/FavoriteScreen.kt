@@ -24,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -34,9 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.carlos.coffeshopapp.R
-import com.carlos.coffeshopapp.repository.BagItemsRepository
 import com.carlos.coffeshopapp.repository.FavoritesItemsRepository
-import com.carlos.coffeshopapp.ui.BagScreen.components.CustomCartListItem
 import com.carlos.coffeshopapp.ui.FavoriteScreen.components.CustomFavoriteListItem
 import com.carlos.coffeshopapp.ui.theme.BackGroundColor
 import com.carlos.coffeshopapp.ui.theme.IconColor

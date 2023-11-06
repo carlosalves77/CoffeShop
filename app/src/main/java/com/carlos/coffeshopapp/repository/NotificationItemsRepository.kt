@@ -10,13 +10,13 @@ object NotificationItemsRepository {
             notificationName = "Promoção Especial de Café",
             notificationComplement = "Desconto de 20% em todas as bebidas de café hoje!",
             notificationDate = "06/11",
-            notificationImage = R.drawable.c1
+            notificationImage = R.drawable.n1
         ),
         NotificationItems(
             notificationName = "Frete Grátis no Café!",
             notificationComplement = "Frete grátis no café da manhã!",
             notificationDate = "10/11",
-            notificationImage = R.drawable.c2
+            notificationImage = R.drawable.n4
         ),
         NotificationItems(
             notificationName = "Novo Café Especial!",
@@ -29,20 +29,20 @@ object NotificationItemsRepository {
             notificationName = "Café Gelado Especial!",
             notificationComplement = "Café gelado com brinde especial!",
             notificationDate = "20/11",
-            notificationImage = R.drawable.c4
+            notificationImage = R.drawable.n2
         ),
         NotificationItems(
-            notificationName = "Café e Bolo: 25% de Desconto!",
+            notificationName = "Café: 25% de Desconto!",
             notificationComplement = "Economize 25% combinando café e bolo!",
             notificationDate = "25/11",
-            notificationImage = R.drawable.c1
+            notificationImage = R.drawable.n3
 
         ),
         NotificationItems(
             notificationName = "Desconto Relâmpago!",
             notificationComplement = "50% off em café por 30 minutos!",
             notificationDate = "30/11",
-            notificationImage = R.drawable.c2
+            notificationImage = R.drawable.n5
         )
     )
 

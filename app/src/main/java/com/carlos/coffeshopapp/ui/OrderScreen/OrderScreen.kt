@@ -179,7 +179,7 @@ fun OrderScreen(navController: NavController) {
         )
         Spacer(modifier.padding(top = 16.dp))
         Text(
-            text = "Jl. Kpg Sutoyo",
+            text = "Ismael Rodrigues",
             modifier.padding(start = 30.dp),
             fontSize = 14.sp,
             fontFamily = FontFamily(Font(R.font.sora_bold)),
@@ -187,7 +187,7 @@ fun OrderScreen(navController: NavController) {
             color = Color(0xFF303336),
         )
         Text(
-            text = "Kpg. Sutoyo No. 620, Bilzen, Tanjungbalai.",
+            text = "Rua Padre Inglês, 257, Boa Vista, Recife.",
             modifier.padding(start = 30.dp),
             fontSize = 12.sp,
             fontFamily = FontFamily(Font(R.font.sora_regular)),
