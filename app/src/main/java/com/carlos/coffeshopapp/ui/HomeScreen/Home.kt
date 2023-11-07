@@ -7,6 +7,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -141,6 +143,9 @@ fun Home(navController: NavController) {
                     contentDescription = null,
                     modifier
                         .size(44.dp)
+                        .clickable (indication = null,interactionSource = MutableInteractionSource()) {
+                            navController.navigate("ProfileScreen")
+                        }
                         .clip(RoundedCornerShape(12.dp)),
                     contentScale = ContentScale.Crop
                 )

@@ -15,6 +15,7 @@ import com.carlos.coffeshopapp.ui.HomeScreen.Home
 import com.carlos.coffeshopapp.ui.NotificationScreen.NotificationScreen
 import com.carlos.coffeshopapp.ui.Onboarding.Onboarding
 import com.carlos.coffeshopapp.ui.OrderScreen.OrderScreen
+import com.carlos.coffeshopapp.ui.Profile.ProfileScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
@@ -77,6 +78,11 @@ fun NavGraph(navController: NavHostController) {
         composable(route = "NotificationScreen") {
             NotificationScreen(navController)
         }
+
+        composable(route = "ProfileScreen") {
+            ProfileScreen(navController)
+        }
+
 
     }
 }
